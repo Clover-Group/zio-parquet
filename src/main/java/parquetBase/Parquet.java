@@ -1,6 +1,5 @@
 package parquetBase;
 
-//import org.apache.parquet.example.data.simple.SimpleGroup;
 import org.apache.parquet.example.data.simple.SimpleGroup;
 import org.apache.parquet.schema.Type;
 
