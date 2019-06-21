@@ -1,6 +1,6 @@
-val ZioVersion = "1.0-RC5"
+val ZioVersion     = "1.0.0-RC8-6"
 val ParquetVersion = "1.10.1"
-val HadoopVersion = "3.2.0"
+val HadoopVersion  = "3.2.0"
 
 resolvers += Resolver.sonatypeRepo("releases")
 resolvers += Resolver.sonatypeRepo("snapshots")
@@ -13,10 +13,9 @@ lazy val root = (project in file("."))
     scalaVersion := "2.12.8",
     maxErrors := 3,
     libraryDependencies ++= Seq(
-      "org.scalaz" %% "scalaz-zio" % ZioVersion, 
-
-      "org.apache.parquet"  % "parquet-avro"   % ParquetVersion,
-      "org.apache.hadoop"   % "hadoop-common"  % HadoopVersion,
+      "dev.zio"            %% "zio"          % ZioVersion,
+      "org.apache.parquet" % "parquet-avro"  % ParquetVersion,
+      "org.apache.hadoop"  % "hadoop-common" % HadoopVersion
     )
   )
 
@@ -52,7 +51,7 @@ scalacOptions := Seq(
   "-Ywarn-nullary-unit",
   "-opt-inline-from:<source>",
   "-opt-warnings",
-  "-opt:l:inline",
+  "-opt:l:inline"
 )
 
 addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.full)

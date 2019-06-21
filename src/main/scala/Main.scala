@@ -1,35 +1,15 @@
 package hello
 
-import parquetBase.ParquetReaderUtils
-import scala.collection.JavaConverters._
+import Reader._
+import zio.{ App }
 
-object  Main extends App {
- 
-    val path = "/tmp/hello.pq"
-  //val path = "/tmp/dump0.pq"
+object Main extends App {
 
-  val parquet       = ParquetReaderUtils.getParquetData(path)
-  val simpleGroup   = parquet.getData()
+  def run(args: List[String]) =
+    res.fold(_ => 1, _ => 0)
 
-  // This accesses a single data type in the frame
-  def getDataType (num:Int) () = parquet.getSchema().get(num)
-  
-  // Custom element read
-  println ("Reading custom elements")
-  val p0 = getDataType(0)
-  val p0Val = simpleGroup.get(0)
+  val path = "/tmp/hello.pq"
 
-  val p1 = getDataType(1)
-  val p1Val = simpleGroup.get(1)
-
-  println(p0)
-  println(p0Val)
-
-  println(p1)
-  println(p1Val) 
-
-  // Iterate thru the whole list  
-  println ("Looping thru the dump")
-  simpleGroup.iterator().asScala.foreach(println)  
+  val res = Reader.getSource(path)
 
 }
