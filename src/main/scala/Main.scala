@@ -10,6 +10,11 @@ object Main extends App {
 
   val path = "/tmp/hello.pq"
 
-  val res = Reader.getSource(path)
+  val res =
+    for {
+      frame  <- Reader.getFrame(path)
+      data   <- Reader.getData(frame)
+      schema <- Reader.getSchema(frame)
+    } yield (data, schema)
 
 }
