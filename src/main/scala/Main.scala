@@ -6,15 +6,13 @@ import zio.{ App }
 object Main extends App {
 
   def run(args: List[String]) =
-    res.fold(_ => 1, _ => 0)
+    out.fold(_ => 1, _ => 0)
 
   val path = "/tmp/hello.pq"
 
-  val res =
-    for {
-      frame  <- Reader.getFrame(path)
-      data   <- Reader.getData(frame)
-      schema <- Reader.getSchema(frame)
-    } yield (data, schema)
+  val fdata = Reader.getAll(path)
+
+  //val out =  fdata map ( v => println(v._1))
+  val out = fdata map (println)
 
 }
