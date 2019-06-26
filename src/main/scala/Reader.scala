@@ -10,17 +10,17 @@ import org.apache.parquet.example.data.simple.SimpleGroup
 
 sealed abstract class Reader {
 
+  type TypeData   = JList[SimpleGroup]
+  type TypeSchema = JList[org.apache.parquet.schema.Type]
+
   def getFrame(fin: String): UIO[Parquet]
-  def getData(frame: Parquet): UIO[SimpleGroup]
-  def getSchema(frame: Parquet): UIO[Int]
-  def getAll(fin: String): UIO[Int]
+  def getData(frame: Parquet): UIO[TypeData]
+  def getSchema(frame: Parquet): UIO[TypeSchema]
+  def getAll(fin: String): UIO[(TypeData, TypeSchema)]
 
 }
 
-object Reader {
-
-  type TypeData   = JList[SimpleGroup]
-  type TypeSchema = JList[org.apache.parquet.schema.Type]
+object Reader extends Reader {
 
   def getFrame(fin: String): UIO[Parquet] = UIO.succeed(ParquetReaderUtils.getParquetData(fin))
 
