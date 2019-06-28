@@ -1,4 +1,4 @@
-val ZioVersion     = "1.0.0-RC8-6"
+val ZioVersion     = "1.0.0-RC9"
 val ParquetVersion = "1.10.1"
 val HadoopVersion  = "3.2.0"
 
