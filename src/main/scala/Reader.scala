@@ -20,7 +20,7 @@ sealed abstract class Reader {
 
 }
 
-object Reader extends Reader {
+object ParquetReader extends Reader {
 
   def getFrame(fin: String): UIO[Parquet] = UIO.succeed(ParquetReaderUtils.getParquetData(fin))
 
@@ -29,9 +29,9 @@ object Reader extends Reader {
 
   def getAll(fin: String): UIO[(TypeData, TypeSchema)] =
     for {
-      frame  <- Reader.getFrame(fin)
-      data   <- Reader.getData(frame)
-      schema <- Reader.getSchema(frame)
+      frame  <- getFrame(fin)
+      data   <- getData(frame)
+      schema <- getSchema(frame)
     } yield (data, schema)
 
 }
