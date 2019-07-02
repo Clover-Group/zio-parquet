@@ -1,4 +1,4 @@
-package Reader
+package ParquetReader
 
 import zio.{ UIO }
 
@@ -14,24 +14,24 @@ sealed abstract class Reader {
   type TypeSchema = JList[org.apache.parquet.schema.Type]
 
   def getFrame(fin: String): UIO[Parquet]
-  def getData(frame: Parquet): UIO[TypeData]
-  def getSchema(frame: Parquet): UIO[TypeSchema]
-  def getAll(fin: String): UIO[(TypeData, TypeSchema)]
+  def getRows(frame: Parquet): UIO[TypeData]
+  def getCols(frame: Parquet): UIO[TypeSchema]
+  def getAll(fin: String): UIO[(TypeData, TypeSchema)]  
 
 }
 
-object ParquetReader extends Reader {
+object Reader extends Reader {
 
   def getFrame(fin: String): UIO[Parquet] = UIO.succeed(ParquetReaderUtils.getParquetData(fin))
 
-  def getData(frame: Parquet): UIO[TypeData]     = UIO.succeed(frame.getData)
-  def getSchema(frame: Parquet): UIO[TypeSchema] = UIO.succeed(frame.getSchema)
-
+  def getRows(frame: Parquet): UIO[TypeData]    = UIO.succeed(frame.getRows)
+  def getCols(frame: Parquet): UIO[TypeSchema]  = UIO.succeed(frame.getCols)
+  
   def getAll(fin: String): UIO[(TypeData, TypeSchema)] =
     for {
       frame  <- getFrame(fin)
-      data   <- getData(frame)
-      schema <- getSchema(frame)
-    } yield (data, schema)
+      rows   <- getRows(frame)
+      cols <- getCols(frame)
+    } yield (rows, cols)
 
 }

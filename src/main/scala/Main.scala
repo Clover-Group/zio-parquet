@@ -1,6 +1,6 @@
 package hello
 
-import Reader._
+import ParquetReader._
 import zio.{ App }
 //import org.apache.parquet.hadoop.ParquetReader
 
@@ -11,9 +11,8 @@ object Main extends App {
 
   val path = "/tmp/hello.pq"
 
-  val fdata = ParquetReader.getAll(path)
+  val fdata = Reader.getAll(path)
 
-  //val out =  fdata map ( v => println(v._1))
   val out = fdata map (println)
 
 }

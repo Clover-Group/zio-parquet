@@ -9,10 +9,10 @@ object Hello extends App {
   //val path = "/tmp/dump0.pq"
 
   val parquet     = ParquetReaderUtils.getParquetData(path)
-  val simpleGroup = parquet.getData()
+  val simpleGroup = parquet.getRows()
 
   // This accesses a single data type in the frame
-  def getDataType(num: Int)() = parquet.getSchema().get(num)
+  def getDataType(num: Int)() = parquet.getCols().get(num)
 
   // Custom element read
   println("Reading custom elements")

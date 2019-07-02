@@ -14,11 +14,17 @@ public class Parquet {
         this.schema = schema;
     }
 
-    public List<SimpleGroup> getData() {
+    public List<SimpleGroup> getRows() {
         return data;
     }
 
-    public List<Type> getSchema() {
+    public List<Type> getCols() {
         return schema;
+    }
+    public int getRowSize() {
+        return data.size();
+    }
+    public int getColSize() {
+        return schema.size();
     }
 }
