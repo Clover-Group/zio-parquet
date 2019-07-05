@@ -2,16 +2,12 @@ package ParquetReader
 
 import zio.{ UIO }
 
-import java.util.{ List => JList }
 import parquetBase.Parquet
 import parquetBase.ParquetReaderUtils
-import org.apache.parquet.example.data.simple.SimpleGroup
-//import scala.collection.JavaConverters._
 
-sealed abstract class Reader {
+import ParquetPkg._
 
-  type TypeData   = JList[SimpleGroup]
-  type TypeSchema = JList[org.apache.parquet.schema.Type]
+sealed abstract class Reader {  
 
   def getFrame(fin: String): UIO[Parquet]
   def getRows(frame: Parquet): UIO[TypeData]
