@@ -1,6 +1,7 @@
 val ZioVersion     = "1.0.0-RC10-1"
 val ParquetVersion = "1.10.1"
 val HadoopVersion  = "3.2.0"
+val Specs2Version  = "4.6.0"
 
 resolvers += Resolver.sonatypeRepo("releases")
 resolvers += Resolver.sonatypeRepo("snapshots")
@@ -13,7 +14,8 @@ maxErrors := 3
 libraryDependencies ++= Seq(
   "dev.zio"            %% "zio"          % ZioVersion,
   "org.apache.parquet" % "parquet-avro"  % ParquetVersion,
-  "org.apache.hadoop"  % "hadoop-common" % HadoopVersion
+  "org.apache.hadoop"  % "hadoop-common" % HadoopVersion,
+  "org.specs2"         %% "specs2-core"  % Specs2Version % "test"
 )
 
 scalacOptions := Seq(

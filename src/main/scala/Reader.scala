@@ -1,33 +1,33 @@
 package ParquetReader
 
-import zio.{ UIO }
+import zio.{ Chunk }
 
 import parquetBase.Parquet
 import parquetBase.ParquetReaderUtils
 
 import ParquetPkg._
 
-sealed abstract class Reader {  
+sealed abstract class Reader {
 
-  def getFrame(fin: String): UIO[Parquet]
-  def getRows(frame: Parquet): UIO[TypeData]
-  def getCols(frame: Parquet): UIO[TypeSchema]
-  def getAll(fin: String): UIO[(TypeData, TypeSchema)]  
+  def getFrame(fin: String): Chunk[Parquet]
+  def getRows(frame: Parquet): Chunk[TypeData]
+  def getCols(frame: Parquet): Chunk[TypeSchema]
+  def getAll(fin: String): Chunk[(TypeData, TypeSchema)]
 
 }
 
 object Reader extends Reader {
 
-  def getFrame(fin: String): UIO[Parquet] = UIO.succeed(ParquetReaderUtils.getParquetData(fin))
+  def getFrame(fin: String): Chunk[Parquet] = Chunk.succeed(ParquetReaderUtils.getParquetData(fin))
 
-  def getRows(frame: Parquet): UIO[TypeData]    = UIO.succeed(frame.getRows)
-  def getCols(frame: Parquet): UIO[TypeSchema]  = UIO.succeed(frame.getCols)
-  
-  def getAll(fin: String): UIO[(TypeData, TypeSchema)] =
+  def getRows(frame: Parquet): Chunk[TypeData]   = Chunk.succeed(frame.getRows)
+  def getCols(frame: Parquet): Chunk[TypeSchema] = Chunk.succeed(frame.getCols)
+
+  def getAll(fin: String): Chunk[(TypeData, TypeSchema)] =
     for {
-      frame  <- getFrame(fin)
-      rows   <- getRows(frame)
-      cols <- getCols(frame)
+      frame <- getFrame(fin)
+      rows  <- getRows(frame)
+      cols  <- getCols(frame)
     } yield (rows, cols)
 
 }

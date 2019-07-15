@@ -1,4 +1,4 @@
-package hello
+/* package hello
 
 import parquetBase.ParquetReaderUtils
 import scala.collection.JavaConverters._
@@ -33,3 +33,4 @@ object Hello extends App {
   simpleGroup.iterator().asScala.foreach(println)
 
 }
+ */

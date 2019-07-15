@@ -1,4 +1,4 @@
-package hello
+/* package hello
 
 import ParquetReader._
 import zio.{ App }
@@ -16,3 +16,4 @@ object Main extends App {
   val out = fdata map (println)
 
 }
+ */
