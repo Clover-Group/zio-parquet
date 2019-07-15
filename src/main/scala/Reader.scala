@@ -18,10 +18,10 @@ sealed abstract class Reader {
 
 object Reader extends Reader {
 
-  def getFrame(fin: String): Chunk[Parquet] = Chunk.succeed(ParquetReaderUtils.getParquetData(fin))
+  def getFrame(fin: String): Chunk[Parquet] = Chunk(ParquetReaderUtils.getParquetData(fin))
 
-  def getRows(frame: Parquet): Chunk[TypeData]   = Chunk.succeed(frame.getRows)
-  def getCols(frame: Parquet): Chunk[TypeSchema] = Chunk.succeed(frame.getCols)
+  def getRows(frame: Parquet): Chunk[TypeData]   = Chunk(frame.getRows)
+  def getCols(frame: Parquet): Chunk[TypeSchema] = Chunk(frame.getCols)
 
   def getAll(fin: String): Chunk[(TypeData, TypeSchema)] =
     for {
